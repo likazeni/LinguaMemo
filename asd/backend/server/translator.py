@@ -1,14 +1,19 @@
+import torch
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 MODEL_PATH = "checkpoint_515"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, max_memory={
     0: "400MB",   # GPU 0 limit
     "cpu": "400MB"  # CPU limit
-})
+}, device_map="cpu",
+torch_dtype=torch.float16,     # половинная точность (экономия памяти)
+low_cpu_mem_usage=True )
 model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_PATH, max_memory={
     0: "400MB",   # GPU 0 limit
     "cpu": "400MB"  # CPU limit
-})
+}, device_map="cpu",              # Только CPU
+torch_dtype=torch.float16,     # половинная точность (экономия памяти)
+low_cpu_mem_usage=True )
 
 def translate(text):
     """Переводит текст с английского на немецкий"""
