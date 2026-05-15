@@ -4,26 +4,30 @@ import os
 import gdown
 from fastapi import FastAPI
 from pydantic import BaseModel
+from contextlib import asynccontextmanager
 
-from .translator import translate
 
-app = FastAPI()
 
-@app.on_event("startup")
-async def load_model():
-    folder_id = "1cMfG4KCt_ZJdpaHaaKCbAu6f0IYiG6EC?usp=sharing"  # Замените на ID вашей папки
+FOLDER_ID = "1cMfG4KCt_ZJdpaHaaKCbAu6f0IYiG6EC"
+MODEL_DIR = "checkpoint_515"
 
-    # Ссылка на папку
-    folder_url = f"https://drive.google.com/drive/folders/{folder_id}"
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    print("🚀 Загружаем модель...")
+    os.makedirs(MODEL_DIR, exist_ok=True)
+    gdown.download_folder(
+        url=f"https://drive.google.com/drive/folders/{FOLDER_ID}",
+        output=MODEL_DIR,
+        quiet=False,
+        use_cookies=False
+    )
+    print("✅ Модель загружена!")
+    yield
+    print("👋 Сервер останавливается")
 
-    # Путь куда сохранять модели
-    output_dir = "checkpoint_515"
+app = FastAPI(lifespan=lifespan)
 
-    # Создаём папку, если её нет
-    os.makedirs(output_dir, exist_ok=True)
-
-    # Скачиваем всю папку
-    gdown.download_folder(url=folder_url, output=output_dir, quiet=False)
 class Item(BaseModel):
     text_trans: str = ''
 @app.post("/async")

@@ -1,6 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-MODEL_PATH = "../model/checkpoint_515"
+MODEL_PATH = "checkpoint_515"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
 model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_PATH)
 
