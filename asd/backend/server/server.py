@@ -1,8 +1,9 @@
 # async_example.py
 from fastapi import FastAPI
-import asyncio
 from pydantic import BaseModel
+
 from translator import translate
+
 app = FastAPI()
 class Item(BaseModel):
     text_trans: str = ''
