@@ -23,9 +23,9 @@ async def lifespan(app: FastAPI):
     print("✅ Модель загружена!")
     yield
     print("👋 Сервер останавливается")
-
+    from .translator import translate
 app = FastAPI(lifespan=lifespan)
-from .translator import translate
+
 class Item(BaseModel):
     text_trans: str = ''
 
