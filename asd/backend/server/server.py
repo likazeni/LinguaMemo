@@ -21,9 +21,10 @@ async def lifespan(app: FastAPI):
         use_cookies=False
     )
     print("✅ Модель загружена!")
+    from .translator import translate
     yield
     print("👋 Сервер останавливается")
-    from .translator import translate
+
 app = FastAPI(lifespan=lifespan)
 
 class Item(BaseModel):
