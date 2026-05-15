@@ -1,12 +1,10 @@
 # async_example.py
 import os
+from contextlib import asynccontextmanager
 
 import gdown
 from fastapi import FastAPI
 from pydantic import BaseModel
-from contextlib import asynccontextmanager
-
-
 
 FOLDER_ID = "1cMfG4KCt_ZJdpaHaaKCbAu6f0IYiG6EC"
 MODEL_DIR = "checkpoint_515"
@@ -27,9 +25,16 @@ async def lifespan(app: FastAPI):
     print("👋 Сервер останавливается")
 
 app = FastAPI(lifespan=lifespan)
-
+from translator import translate
 class Item(BaseModel):
     text_trans: str = ''
+
+
+@app.get("/")
+async def root():
+    return {"status": "ok", "message": "LinguaMemo API is running"}
+
+
 @app.post("/async")
 async def async_endpoint(item: Item):
     text_for_translate = item.text_trans
