@@ -25,7 +25,7 @@ async def lifespan(app: FastAPI):
     print("👋 Сервер останавливается")
 
 app = FastAPI(lifespan=lifespan)
-from translator import translate
+from .translator import translate
 class Item(BaseModel):
     text_trans: str = ''
 
