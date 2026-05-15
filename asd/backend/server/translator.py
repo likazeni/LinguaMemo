@@ -1,11 +1,11 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 MODEL_PATH = "checkpoint_515"
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, load_in_4bit=True, max_memory={
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, max_memory={
     0: "400MB",   # GPU 0 limit
     "cpu": "400MB"  # CPU limit
 })
-model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_PATH, load_in_4bit=True, max_memory={
+model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_PATH, max_memory={
     0: "400MB",   # GPU 0 limit
     "cpu": "400MB"  # CPU limit
 })
