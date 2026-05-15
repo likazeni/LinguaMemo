@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from translator import translate
+from .translator import translate
 
 app = FastAPI()
 class Item(BaseModel):
