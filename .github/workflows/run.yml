@@ -21,4 +21,4 @@ jobs:
           pip install -r requirements.txt
       
       - name: Run script
-        run: python asd/backend/model/__init__.py
+        run: python 'asd/backend/model/download model.py'
