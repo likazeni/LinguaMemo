@@ -15,7 +15,7 @@ async def lifespan(app: FastAPI):
     print("🚀 Загружаем модель...")
     os.makedirs(MODEL_DIR, exist_ok=True)
     gdown.download_folder(
-        url=f"https://drive.google.com/drive/folders/{FOLDER_ID}",
+        url=f"https://drive.google.com/drive/folders/1cMfG4KCt_ZJdpaHaaKCbAu6f0IYiG6EC",
         output=MODEL_DIR,
         quiet=False,
         use_cookies=False
