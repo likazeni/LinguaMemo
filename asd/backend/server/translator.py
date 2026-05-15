@@ -1,8 +1,8 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 MODEL_PATH = "checkpoint_515"
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_PATH)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, load_in_4bit=True)
+model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_PATH, load_in_4bit=True)
 
 def translate(text):
     """Переводит текст с английского на немецкий"""
